@@ -1,15 +1,17 @@
 const express = require("express");
-// const db = require("./config/mongoose");
 const app = express();
-const port = 5000;
+const port = 8000;
 
-app.use(express.urlencoded({ extended: true }));
-// app.use("/products", require("./routes/products"));
+const db = require("./config/mongoose");
 
-app.listen(port, function (err) {
-  if (err) {
-    console.log(`Error in starting the server: ${err}`);
+app.use(express.urlencoded());
+
+app.use("/", require("./routes/products"));
+
+app.listen(port, function (error) {
+  if (error) {
+    console.log(`Error in running server ${error}`);
     return;
   }
-  console.log(`Server is running on port: ${port}`);
+  console.log(`Server is running on port ${port}`);
 });
